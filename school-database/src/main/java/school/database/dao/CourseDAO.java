@@ -60,10 +60,10 @@ public class CourseDAO {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 
-		String hql = "SELECT c FROM Course c where c.name = :name";
+		String hql = "SELECT c FROM Course c where c.name like :name";
 
 		TypedQuery<Course> query = session.createQuery(hql, Course.class);
-		query.setParameter("name", name);
+		query.setParameter("name", name + "%");
 
 		List<Course> result = query.getResultList();
 
