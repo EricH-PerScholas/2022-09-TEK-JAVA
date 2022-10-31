@@ -3,6 +3,16 @@ package school.database.util;
 import org.apache.commons.lang3.StringUtils;
 
 public class EmailValidation {
+	
+	// HOMEWORK 
+	// create a new method for validating a phone number and return true or false
+	// a phone number must have 9 numbers, any more or less is an error
+	// a phone number is allowed to have '-' '.' or ' ' in the phone number any number of times at any location
+	// a phone number must not be null or empty
+	// a phone number must not begin with 555
+	//
+	// create a test in the EmailValidationTest class .. that will test with at least 5 negative cases
+	// craet a test that will validate 5 or more positive cases
 
 	public boolean isValidEmail(String email) {
 		// 1) make sure the string has an @ in it
