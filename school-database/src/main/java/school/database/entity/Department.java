@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,14 +21,17 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@EqualsAndHashCode
 @Table(name = "department")
 public class Department {
 
 	@Id
 	@Column(name = "id")
+	@EqualsAndHashCode.Include
 	private Integer id;
 
 	@Column(name = "name")
+	@EqualsAndHashCode.Exclude
 	private String name;
 	
 	// mapped by department because ... deparment is the name of the java variable in the Course entity
