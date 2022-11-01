@@ -15,6 +15,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -22,20 +23,26 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @EqualsAndHashCode
+@ToString
 @Table(name = "department")
 public class Department {
 
 	@Id
 	@Column(name = "id")
 	@EqualsAndHashCode.Include
+	@ToString.Include
 	private Integer id;
 
 	@Column(name = "name")
-	@EqualsAndHashCode.Exclude
+	@EqualsAndHashCode.Include
+	@ToString.Include
 	private String name;
 	
 	// mapped by department because ... deparment is the name of the java variable in the Course entity
 	@OneToMany(mappedBy = "department", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@EqualsAndHashCode.Exclude
+	@ToString.Exclude
 	private List<Course> courses;
 
+	
 }
