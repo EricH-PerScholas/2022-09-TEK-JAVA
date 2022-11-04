@@ -1,0 +1,41 @@
+.border-box {
+    border:10px;
+    border-top:25px;
+    border-right:15px; 
+    border-style: solid; 
+    border-radius:25px; 
+    padding:25px; 
+    margin-top:50px !important;
+    margin:15px;
+    background-color:#bd0ff2;
+}
+
+.border-box>p {
+    color:orange;
+}
+
+h3:hover {
+    background-color:chocolate;
+    cursor: pointer;
+}
+
+h1,h2,h3,h4 {
+    color: red;
+    background-color: yellow;
+}
+
+p {
+    color: cyan;
+}
+
+#anything {
+    background-color: aquamarine;
+}
+
+.odd {
+    background-color:grey;
+}
+
+.even {
+    background-color:lightgrey;
+}
