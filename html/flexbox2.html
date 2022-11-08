@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+
+    <style>
+        .flex-container {
+            width: 40%;
+            height: 500px;
+            margin: 100px auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            background-color: black;
+        }
+
+        .flex-item {
+            background-color: beige;
+            width: 200px;
+            height: 100px;
+            text-align: center;
+            font-size: 100px;
+        }
+
+        .flex-item-expanded {
+            background-color: bisque;
+            width: 500px;
+        }
+
+        .first-item {
+            order: 1;
+        }
+
+        .second-item {
+            order: 2;
+        }
+
+        .last-item {
+            order: -1;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="flex-container">
+        <div class="flex-item" style="order:6">
+            1
+        </div>
+        <div class="flex-item" style="order:5">
+            2
+        </div>
+        <div class="flex-item" style="order:4">
+            3
+        </div>
+        <div class="flex-item" style="order:3">
+            4
+        </div>
+        <div class="flex-item flex-item-expanded" style="order:10">
+            5
+        </div>
+        <div class="flex-item" style="order:2">
+            6
+        </div>
+    </div>
+</body>
+
+</html>

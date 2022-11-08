@@ -17,7 +17,7 @@
 		<!-- MySQL DB dialect -->
 		<property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
 		<!-- print all executed SQL on console -->
-		<property name="hibernate.show_sql">true </property>
+		<property name="hibernate.show_sql">false </property>
 		<property name="hibernate.format_sql">true </property>
 
 		<!-- Mapping entity file -->
