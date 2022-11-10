@@ -8,12 +8,68 @@
 </head>
 
 <script>
+    let student = {
+        firstName: "John",
+        lastName: "Doe",
+        age: 30,
+        class: {
+            name: "Java developer",
+            time: "Every Day"
+        },
+        arr: ["abc", "cde", "fgh"]
 
+    };
+
+    console.log(student);
+    console.log(student.firstName + " = " + student["firstName"]);
+    console.log(student.lastName);
+    console.log(student.class.name);
+    console.log(student.age);
+    console.log(student.arr[2]);
+
+    student.firstName = "A new first name";
+    student["lastName"] = "A new last name";
+    delete student.age;
+
+    // loop over the student object and print the key value pairs
+    for (key in student) {
+        let value = student[key];
+        console.log("!!!!!!! " + key + " = " + value);
+    }
+
+    var a = new Array(10);
+    a[0] = 0;
+    a[1] = "string";
+    a[2] = 1;
+    a.length = 4;
+
+    a.push("next to last value");
+    a.push("last value");
+
+    let pop = a.pop();
+
+    console.log(a);
+    console.log(a[a[2]]);
+    console.log(pop);
+
+    var fruits = ["Banana", "Orange", "Apple", "Mango"];
+    fruits.sort();        // Sorts the elements of fruits
+    console.log(fruits)
 
 </script>
 
 <body class='margin:10px'>
-    <h1>Hello, world!</h1>
+    <h1 id="header-title">Hello, world!</h1>
+
+    <script>
+        var header= document.getElementById('header-title');
+        console.log("======================");
+        console.log(header.innerHTML);
+        header.innerHTML = "Replacing the html"
+       </script>
+  
+
 
 </body>
+
 </html>
