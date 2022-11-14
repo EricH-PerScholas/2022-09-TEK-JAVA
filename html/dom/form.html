@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This is the title</title>
+</head>
+
+<style>
+    input {
+        margin-bottom:10px;
+    }
+</style>
+
+<body>
+
+<h1>Form Example</h1>
+
+<form onsubmit="mySubmitFunction(event)">
+    First Name <input type="text" name="firstName" id="firstNameId">
+    <br>
+    Last Name <input type="text" name="lastName" id="lastNameId">
+    <br>
+    Phone # <input type="text" name="phone" id="phoneId">
+    <br><br>
+    <button>Submit</button>
+</form>
+
+<script>
+    function mySubmitFunction(e) {
+        e.preventDefault();
+        console.log("form submitted");
+
+        let fn = document.getElementById("firstNameId");
+        console.log(fn.value);
+    }
+</script>
+
+<!-- when the form submits -->
+<!-- make sure the phone number only has numbers and spaces -->
+<!-- make sure the first and last name fields have a value in them -->
+<!-- when there is an error, I want you to change the border color of the input tag to be red -->
+<!-- also, put a red message under the input box giving an error message -->
+
+</body>
+</html>
