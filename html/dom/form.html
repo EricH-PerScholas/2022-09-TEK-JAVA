@@ -12,6 +12,12 @@
     input {
         margin-bottom:10px;
     }
+
+    .error-field {
+        border:2px solid red;
+        box-shadow: 0 0 10px #719ECE;
+        border-radius: 15px;
+    }
 </style>
 
 <body>
@@ -33,8 +39,22 @@
         e.preventDefault();
         console.log("form submitted");
 
-        let fn = document.getElementById("firstNameId");
-        console.log(fn.value);
+        let firstName = document.getElementById("firstNameId");
+        let lastName = document.getElementById("lastNameId");
+        let phone = document.getElementById("phoneId");
+
+        if ( firstName.value == "" ) {
+            firstName.classList.add('error-field');
+        }
+
+        if ( lastName.value == "" ) {
+            lastName.classList.add('error-field');
+        }
+
+       if ( ! phone.value.match(/[0-9]{3}[-\s\.]*[0-9]{3}\s*[0-9]{4}/gm) ) {
+            phone.classList.add('error-field');
+       }
+
     }
 </script>
 
