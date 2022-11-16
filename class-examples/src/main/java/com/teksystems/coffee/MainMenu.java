@@ -38,11 +38,13 @@ public class MainMenu {
 	// then you can copy the array to a new array of size length - 1;
 	// 
 	// 
+
 	
 	private Scanner scanner = new Scanner(System.in);
 	private CoffeeShop shop = new CoffeeShop();
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) {		
+		
 		try {
 			MainMenu m = new MainMenu();
 			m.start();
