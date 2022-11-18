@@ -13,6 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.teksystems.springboot.database.dao.CourseDAO;
 import com.teksystems.springboot.database.entity.Course;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class IndexController {
 	
@@ -64,6 +67,38 @@ public class IndexController {
 		System.out.println("Index controller search request");
 		
 		return null;
+	}
+	
+	@RequestMapping(value = {"/course"}, method = RequestMethod.GET)
+	public ModelAndView course() {
+		// this method is called when /course is in the URL
+		log.info("Index controller course request method");
+		
+		ModelAndView response = new ModelAndView();
+		response.setViewName("course");
+		
+		return response;
+	}
+	
+	@RequestMapping(value = {"/courseSubmit"}, method = RequestMethod.GET)
+	public ModelAndView courseSubmit(@RequestParam(required = false) String courseName, 
+									 @RequestParam(required = false) String instructorName) {
+		
+		log.info("Index controller course submit method");
+		log.info("Course Submit : courseName     : " + courseName);	
+		log.info("Course Submit : instructorName : " + instructorName);	
+			
+		
+		Course course = new Course();
+		course.setName(courseName);
+		course.setInstructor(instructorName);
+		
+		courseDao.save(course);
+		
+		ModelAndView response = new ModelAndView();
+		response.setViewName("course");
+		
+		return response;
 	}
 	
 }
