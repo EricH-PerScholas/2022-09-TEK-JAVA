@@ -25,12 +25,14 @@
     <table border="1" cellpadding="5">
         <tr>
             <td><B>ID</B></td>
-            <td><b>Name</b></td>
+            <td><b>Course Name</b></td>
+            <td><b>Instructor</b></td>
         </tr>
         <c:forEach items="${courses}" var="course">
             <tr>      
                 <td>${course.id}</td>
                 <td>${course.name}</td>
+                <td>${course.instructor}</td>
             </tr>
         </c:forEach>
     </table>

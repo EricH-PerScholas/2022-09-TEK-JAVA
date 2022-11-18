@@ -19,5 +19,6 @@ public interface CourseDAO extends JpaRepository<Course, Long> {
 	
 	public Course findByNameAndId(String name, Integer id);
 	
+	@Query("SELECT c FROM Course c where c.name = :name or c.instructor = :instructor")
 	public List<Course> findByNameOrInstructor(String name, String instructor);
 }
