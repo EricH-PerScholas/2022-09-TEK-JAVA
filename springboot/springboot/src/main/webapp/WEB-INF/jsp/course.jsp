@@ -13,6 +13,10 @@
 
 <h1>Create a new course</h1>
 
+<c:if test="${not empty error}">
+    <p style="color:red">${error}</p>
+</c:if>
+
 <form action="/courseSubmit">
     Course Name : <input type="text" name="courseName">
     <br>
