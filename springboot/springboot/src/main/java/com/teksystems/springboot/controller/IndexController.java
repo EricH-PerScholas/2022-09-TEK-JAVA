@@ -1,8 +1,8 @@
 package com.teksystems.springboot.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -99,22 +99,30 @@ public class IndexController {
 		log.info("Course Submit : courseName     : " + courseName);
 		log.info("Course Submit : instructorName : " + instructorName);
 
-		String errormessage = "";
-		boolean error = false;
+		// change this error message to a list of strings
+		// add the error message list to the model
+		// fix the JSP page to use a loop inside the if statement to show errors on the page
+		List<String> errormessages = new ArrayList<>();
 		if (courseName == null || courseName.equals("")) {
-			errormessage = errormessage + "The course name can not be empty";
-			error = true;
+			errormessages.add("The course name can not be empty");
 		}
 
 		if (instructorName == null || instructorName.equals("")) {
-			errormessage = errormessage + "The instructor name can not be empty";
-			error = true;
+			errormessages.add("The instructor name can not be empty");
 		}
 
-		if (error) {
+		if (!errormessages.isEmpty()) {
 			// there is an error
-			log.info(errormessage);
-			response.addObject("error", errormessage);
+			for ( String error : errormessages ) {
+				log.info(error);
+			}
+			response.addObject("errors", errormessages);
+			
+			// by putting these incoming values back into the model we can prepopulate the 
+			// form so the user does not have to enter the values again.
+			// we only want to do this in the case of an error.
+			response.addObject("courseNameKey", courseName);
+			response.addObject("instructorNameKey", instructorName);
 		} else {
 			Course course = new Course();
 			course.setName(courseName);
