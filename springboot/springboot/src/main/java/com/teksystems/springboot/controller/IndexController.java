@@ -32,29 +32,30 @@ public class IndexController {
 	
 	
 	@RequestMapping(value = {"/", "/index", "/index.html"}, method = RequestMethod.GET)
-	public ModelAndView slash(@RequestParam(required = false) String search) {
+	public ModelAndView slash(@RequestParam(required = false) String courseName, @RequestParam(required = false) String instructorName) {
 		
 		ModelAndView response = new ModelAndView();
 		response.setViewName("index");
 		
-		// print out the incoming value in search variable
-		System.out.println("Search parameter to page : " + search);	
-		// add the search variable to the model so it can be displayed on the page.
-		response.addObject("search", search);
-		
-		
-		
-		
 		response.addObject("name", "Eric");
 		
-//		System.out.println("Index controller request");
-//		
-		List<Course> courses = courseDao.findByNameContainingIgnoreCaseOrderByNameDesc(search);
-//		for ( Course c : courses ) {
-//			System.out.println(c.getName());
-//		}
-		response.addObject("courses", courses);
+		// print out the incoming value in search variable
+		System.out.println("Search parameter to page courseName     : " + courseName);	
+		System.out.println("Search parameter to page instructorName : " + instructorName);	
+		// add the search variable to the model so it can be displayed on the page.
+		response.addObject("courseNameKey", courseName);		
+		response.addObject("instructorNameKey", instructorName);
 		
+		
+		//if ( courseName != null && !courseName.equals("") ) {
+			//List<Course> courses = courseDao.findByNameContainingIgnoreCaseOrderByNameDesc(courseName);
+			List<Course> courses = courseDao.findByNameOrInstructor(courseName, instructorName);
+			for ( Course c : courses ) {
+				System.out.println(c.getName());
+			}
+			response.addObject("courses", courses);
+		//}
+			
 		return response;
 	}
 	

@@ -13,7 +13,10 @@
 	<h1>Index Page ${name}</h1>
 
     <form method="get" action="/">
-        Search : <input type="text" name="search" value="${search}">
+        Course Name : <input type="text" name="courseName" value="${courseNameKey}" style="margin-bottom:10px">
+        <br>
+        Instructor Name : <input type="text" name="instructorName" value="${instructorNameKey}" style="margin-bottom:10px">
+        <br>
         <button type="submit">Search</button>
     </form>
     
