@@ -19,6 +19,12 @@
     </c:forEach>   
 </c:if>
 
+<table style="border: 1px solid black">
+    <tr th:each="error: ${errors}">
+       <td th:text="${error}" />
+    </tr>
+</table>
+
 <form action="/courseSubmit">
     Course Name : <input type="text" name="courseName" value="${courseNameKey}">
     <br>

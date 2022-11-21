@@ -31,7 +31,7 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		
+
 
 		<!-- Tomcat Embed -->
 		<dependency>
@@ -48,7 +48,6 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 		</dependency>
-
 
 		<!-- database -->
 		<dependency>

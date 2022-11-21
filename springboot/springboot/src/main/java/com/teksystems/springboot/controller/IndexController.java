@@ -3,12 +3,16 @@ package com.teksystems.springboot.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.teksystems.springboot.database.dao.CourseDAO;
@@ -133,5 +137,28 @@ public class IndexController {
 		
 		return response;
 	}
+	
+	// this is completely and totally wrong for a controller
+	// you can not have any class level parameters in a controller
+	private String value = "X";
+	
+	@ResponseBody
+	@RequestMapping(value = { "/course/path/{id}" }, method = RequestMethod.GET)
+	public Course pathVar(@PathVariable Integer id, HttpSession session ) {
+		log.info("Incoming path variable = " + id);
+		
+		Course c = courseDao.findById(id);
+		log.info("this is my couse name " + c.getName());
+		
+		if ( session.getAttribute("key") == null ) {
+			log.info("Key not found in session");
+			session.setAttribute("key", "value");
+		} else {
+			log.info("Key is in the session ");
+		}
+		
+		return c;
+	}
+
 
 }
