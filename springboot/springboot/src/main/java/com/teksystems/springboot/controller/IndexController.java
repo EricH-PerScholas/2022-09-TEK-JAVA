@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -20,9 +23,14 @@ import com.teksystems.springboot.database.entity.Course;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Slf4j
 @Controller
 public class IndexController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
 
 	@Autowired
 	private CourseDAO courseDao;
@@ -85,6 +93,7 @@ public class IndexController {
 	public ModelAndView course() {
 		// this method is called when /course is in the URL
 		log.info("Index controller course request method");
+		logger.info("this is using the static logger");
 
 		ModelAndView response = new ModelAndView();
 		response.setViewName("course");
@@ -158,6 +167,21 @@ public class IndexController {
 		}
 		
 		return c;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "/course/all" }, method = RequestMethod.GET)
+	public List<Course> allCourses() {
+		log.error("This is an error");
+		log.warn("This is a warning");
+		log.info("This is info");
+		log.debug("This is debug");
+		
+		System.out.println("This is never okay");
+		
+		List<Course> courses = courseDao.findAll();
+		
+		return courses;
 	}
 
 
