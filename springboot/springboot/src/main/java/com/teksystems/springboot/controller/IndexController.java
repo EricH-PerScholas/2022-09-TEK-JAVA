@@ -2,12 +2,12 @@ package com.teksystems.springboot.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-
-
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -23,13 +23,10 @@ import com.teksystems.springboot.database.entity.Course;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 @Slf4j
 @Controller
 public class IndexController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
 
 	@Autowired
@@ -101,7 +98,7 @@ public class IndexController {
 		return response;
 	}
 
-	@RequestMapping(value = { "/courseSubmit" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/courseSubmit" }, method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView courseSubmit(@RequestParam(required = false) String courseName,
 			@RequestParam(required = false) String instructorName) {
 
@@ -114,7 +111,8 @@ public class IndexController {
 
 		// change this error message to a list of strings
 		// add the error message list to the model
-		// fix the JSP page to use a loop inside the if statement to show errors on the page
+		// fix the JSP page to use a loop inside the if statement to show errors on the
+		// page
 		List<String> errormessages = new ArrayList<>();
 		if (courseName == null || courseName.equals("")) {
 			errormessages.add("The course name can not be empty");
@@ -126,12 +124,12 @@ public class IndexController {
 
 		if (!errormessages.isEmpty()) {
 			// there is an error
-			for ( String error : errormessages ) {
+			for (String error : errormessages) {
 				log.info(error);
 			}
 			response.addObject("errors", errormessages);
-			
-			// by putting these incoming values back into the model we can prepopulate the 
+
+			// by putting these incoming values back into the model we can prepopulate the
 			// form so the user does not have to enter the values again.
 			// we only want to do this in the case of an error.
 			response.addObject("courseNameKey", courseName);
@@ -143,32 +141,32 @@ public class IndexController {
 
 			courseDao.save(course);
 		}
-		
+
 		return response;
 	}
-	
+
 	// this is completely and totally wrong for a controller
 	// you can not have any class level parameters in a controller
 	private String value = "X";
-	
+
 	@ResponseBody
 	@RequestMapping(value = { "/course/path/{id}" }, method = RequestMethod.GET)
-	public Course pathVar(@PathVariable Integer id, HttpSession session ) {
+	public Course pathVar(@PathVariable Integer id, HttpSession session) {
 		log.info("Incoming path variable = " + id);
-		
+
 		Course c = courseDao.findById(id);
 		log.info("this is my couse name " + c.getName());
-		
-		if ( session.getAttribute("key") == null ) {
+
+		if (session.getAttribute("key") == null) {
 			log.info("Key not found in session");
 			session.setAttribute("key", "value");
 		} else {
 			log.info("Key is in the session ");
 		}
-		
+
 		return c;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = { "/course/all" }, method = RequestMethod.GET)
 	public List<Course> allCourses() {
@@ -176,13 +174,27 @@ public class IndexController {
 		log.warn("This is a warning");
 		log.info("This is info");
 		log.debug("This is debug");
-		
+
 		System.out.println("This is never okay");
-		
+
 		List<Course> courses = courseDao.findAll();
-		
+
 		return courses;
 	}
+	
+	@RequestMapping(value = { "/course/instructor" }, method = RequestMethod.GET)
+	public ModelAndView instCount() {
+		ModelAndView response = new ModelAndView();
+		response.setViewName("instructor_count");
+		
+		List<Map<String,Object>> instructorCounts = courseDao.instructorCourseCount();
+		for ( Map<String,Object> count : instructorCounts ) {
+			log.debug(count.get("instructor") + " is teaching " + count.get("cnt") + " course(s)");
+		}
+		
+		response.addObject("instructorCounts", instructorCounts);
 
+		return response;
+	}
 
 }

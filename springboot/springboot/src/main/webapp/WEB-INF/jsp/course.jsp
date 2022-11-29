@@ -25,7 +25,7 @@
     </tr>
 </table>
 
-<form action="/courseSubmit">
+<form action="/courseSubmit" method="post">
     Course Name : <input type="text" name="courseName" value="${courseNameKey}">
     <br>
     Instructor Name : <input type="text" name="instructorName" value="${instructorNameKey}">

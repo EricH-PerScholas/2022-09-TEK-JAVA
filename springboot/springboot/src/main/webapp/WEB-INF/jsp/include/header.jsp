@@ -7,4 +7,10 @@
     <title>Insert title here</title>
 </head>
 
+<!-- include bootstrap here -->
+<!-- include global CSS files here -->
+
 <body>
+
+<!-- site navigation bar on top of page -->
+
