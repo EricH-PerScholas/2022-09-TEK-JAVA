@@ -21,7 +21,6 @@ public class CreateUserForm {
 	@EmailUnique(message = "Email already exists in the database.")
 	private String email;
 	
-	@NotEmpty(message = "Password is required.")
 	@Pattern(regexp = "^[a-zA-Z0-9!@#]+$", message = "Password can only contain lowercase, uppercase, and special caracters")
 	@Length(min = 8, message = "Password must be longer than 8 characters.")
 	@Length(max = 25, message = "Password must be shorter than 25 characters.")
