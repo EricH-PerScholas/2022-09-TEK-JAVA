@@ -41,7 +41,7 @@ public class LoginController {
 		log.debug("This is in the POST method for create user");
 
 		log.debug(form.toString());
-
+		
 		for (ObjectError e : bindingResult.getAllErrors()) {
 			log.debug(e.getObjectName() + " : " + e.getDefaultMessage());
 		}
@@ -61,6 +61,9 @@ public class LoginController {
 			user.setCreateDate(new Date());
 
 			userDao.save(user);
+		} else {
+			response.addObject("bindingResult", bindingResult);
+			response.addObject("form", form);
 		}
 
 		return response;
