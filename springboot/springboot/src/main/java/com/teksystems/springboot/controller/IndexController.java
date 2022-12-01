@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.teksystems.springboot.database.dao.CourseDAO;
 import com.teksystems.springboot.database.entity.Course;
+import com.teksystems.springboot.security.AuthenticatedUserService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,6 +32,9 @@ public class IndexController {
 
 	@Autowired
 	private CourseDAO courseDao;
+	
+	@Autowired
+	private AuthenticatedUserService authService;
 
 	@Value("${spring.datasource.url}")
 	private String variable;
@@ -75,6 +79,15 @@ public class IndexController {
 		}
 		response.addObject("courses", courses);
 		// }
+		
+		// if the user is authenticated
+		if ( authService.isAuthenticated() ) {
+			boolean isAdmin = authService.isUserInRole("ADMIN");
+			log.debug(authService.getCurrentUsername() + " is current logged in and admin access = " + isAdmin);
+			log.debug(authService.getCurrentUser() + "");
+		} else {
+			log.debug("USER NOT LOGGED IN");
+		}
 
 		return response;
 	}

@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.teksystems.springboot.database.dao.UserDAO;
+import com.teksystems.springboot.database.dao.UserRoleDAO;
 import com.teksystems.springboot.database.entity.User;
+import com.teksystems.springboot.database.entity.UserRole;
 import com.teksystems.springboot.form.CreateUserForm;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +28,13 @@ public class LoginController {
 
 	@Autowired
 	private UserDAO userDao;
+	
+	@Autowired
+	private UserRoleDAO userRoleDao;
+	
+	@Autowired
+	@Qualifier("passwordEncoder")
+	private PasswordEncoder passwordEncoder;
 	
 	// this method is request mapping to show the actual login JSP page.
 	// the URL here in the mapping is the same URL configured in spring security .loginPage
@@ -58,11 +69,13 @@ public class LoginController {
 
 		if ( ! bindingResult.hasErrors()) {
 			User user = new User();
+			
+			String encodedPassword = passwordEncoder.encode(form.getPassword());
+			user.setPassword(encodedPassword);
 
 			user.setFirstName(form.getFirstName());
 			user.setLastName(form.getLastName());
 			user.setEmail(form.getEmail());
-			user.setPassword(form.getPassword());
 			user.setAddress(form.getAddress());
 			user.setCity(form.getCity());
 			user.setState(form.getState());
@@ -71,6 +84,14 @@ public class LoginController {
 			user.setCreateDate(new Date());
 
 			userDao.save(user);
+			
+			UserRole ur = new UserRole();
+			ur.setRoleName("USER");
+			ur.setUserId(user.getId());
+			
+			userRoleDao.save(ur);
+			
+			
 		} else {
 			response.addObject("bindingResult", bindingResult);
 			response.addObject("form", form);
