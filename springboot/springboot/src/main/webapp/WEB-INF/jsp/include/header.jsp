@@ -15,5 +15,16 @@
 
 <body>
 
+<div class="container">
+	<div class="row">
+		<div class="col-10">
+			<a href="/">Home</a> |
+			<a href="/user/createuser">Create User</a> |
+			<a href="/admin/admintest">Admin Test</a> |
+			<a href="/user/logout">Logout</a>
+		</div>
+	</div>
+</div>
+
 <!-- site navigation bar on top of page -->
 

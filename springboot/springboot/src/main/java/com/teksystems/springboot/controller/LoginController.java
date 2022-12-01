@@ -24,6 +24,16 @@ public class LoginController {
 
 	@Autowired
 	private UserDAO userDao;
+	
+	// this method is request mapping to show the actual login JSP page.
+	// the URL here in the mapping is the same URL configured in spring security .loginPage
+	@RequestMapping(value = "/user/login", method = RequestMethod.GET)
+	public ModelAndView login() {
+		ModelAndView response = new ModelAndView();
+		response.setViewName("login_pages/login");
+		return response;
+	}
+	
 
 	@RequestMapping(value = "/user/createuser", method = RequestMethod.GET)
 	public ModelAndView createUser() {
