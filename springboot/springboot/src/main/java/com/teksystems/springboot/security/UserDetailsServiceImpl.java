@@ -33,6 +33,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// this class is used by spring security to fetch the user from the database 
+		// and create the user roles
+		
 		User user = userDao.findByEmail(username);
 
 		if (user == null) {
