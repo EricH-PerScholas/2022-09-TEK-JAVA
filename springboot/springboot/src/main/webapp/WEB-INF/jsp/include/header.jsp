@@ -18,8 +18,8 @@
 <body>
 
 <div class="container">
-	<div class="row">
-		<div class="col-10">
+	<div class="row mt-1 mb-3 justify-content-center">
+		<div class="col-6">
 			<a href="/">Home</a> |
 			<a href="/user/createuser">Create User</a> |
 			
@@ -31,7 +31,7 @@
 				<a href="/user/logout">Logout</a> |
 				<sec:authentication property="principal.username" />
 			</sec:authorize>
-			
+
 			<sec:authorize access="!isAuthenticated()">
 				<a href="/user/login">Login</a>
 			</sec:authorize>
