@@ -45,6 +45,16 @@ public class LoginController {
 		return response;
 	}
 	
+	// in this situation we are returning the view name as a string without a model
+	@RequestMapping(value = "/user/example", method = RequestMethod.GET)
+	public String example() {
+		// so if the method returns just a string then that is considered to be the view name
+		return "login_pages/login";
+		
+		// this is not to be confused with the @ResponseBody annotation, which would then return the string
+		// directely to the browser with no view
+	}
+	
 
 	@RequestMapping(value = "/user/createuser", method = RequestMethod.GET)
 	public ModelAndView createUser() {
@@ -82,6 +92,7 @@ public class LoginController {
 			user.setZip(form.getZip());
 			user.setPhone(form.getPhone());
 			user.setCreateDate(new Date());
+			user.setAvatar(form.getAvatar());
 
 			userDao.save(user);
 			

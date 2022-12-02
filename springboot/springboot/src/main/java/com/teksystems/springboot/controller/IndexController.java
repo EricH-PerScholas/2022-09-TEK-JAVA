@@ -55,7 +55,7 @@ public class IndexController {
 	// name.
 
 	@RequestMapping(value = { "/", "/index", "/index.html" }, method = RequestMethod.GET)
-	public ModelAndView slash(@RequestParam(required = false) String courseName,
+	public ModelAndView slash(@RequestParam(required = false) String courseName, 
 			@RequestParam(required = false) String instructorName) {
 
 		ModelAndView response = new ModelAndView();

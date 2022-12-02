@@ -16,6 +16,8 @@ import lombok.ToString;
 @ToString
 public class CreateUserForm {
 	
+	private Integer productId;
+	
 	@NotEmpty(message = "Email is required.")
 	@Length(max = 200, message = "Email must be less than 200 characters.")
 	@EmailUnique(message = "Email already exists in the database.")
@@ -47,5 +49,5 @@ public class CreateUserForm {
 	@Length(max = 45, message = "Phone number must be less than 45 characters.")
 	private String phone;
 	
-	
+	private String avatar;
 }
