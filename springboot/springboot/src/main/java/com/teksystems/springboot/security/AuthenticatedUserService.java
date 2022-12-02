@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
@@ -27,7 +28,7 @@ public class AuthenticatedUserService {
 
 	// added @Lazy to this to prevent a circular loading reference in component scan
 	// https://stackoverflow.com/questions/65807838/spring-authenticationmanager-and-circular-dependency
-	@Lazy
+	//@Lazy
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
@@ -73,5 +74,12 @@ public class AuthenticatedUserService {
 		}
 
 		return (authentication != null && authentication.isAuthenticated());
+	}
+	
+	public void changeLoggedInUsername(String username, String password) {
+		// reset security principal to be the new user information
+		Authentication request = new UsernamePasswordAuthenticationToken(username, password);
+		Authentication result = authenticationManager.authenticate(request);
+		SecurityContextHolder.getContext().setAuthentication(result);
 	}
 }

@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.authorization.AuthenticatedAuthorizationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,7 @@ import com.teksystems.springboot.database.dao.UserRoleDAO;
 import com.teksystems.springboot.database.entity.User;
 import com.teksystems.springboot.database.entity.UserRole;
 import com.teksystems.springboot.form.CreateUserForm;
+import com.teksystems.springboot.security.AuthenticatedUserService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,6 +33,9 @@ public class LoginController {
 	
 	@Autowired
 	private UserRoleDAO userRoleDao;
+	
+	@Autowired
+	private AuthenticatedUserService authService;
 	
 	@Autowired
 	@Qualifier("passwordEncoder")
@@ -102,6 +107,7 @@ public class LoginController {
 			
 			userRoleDao.save(ur);
 			
+			authService.changeLoggedInUsername(user.getEmail(), form.getPassword());
 			
 		} else {
 			response.addObject("bindingResult", bindingResult);
