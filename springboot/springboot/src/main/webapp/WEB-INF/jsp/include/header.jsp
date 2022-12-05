@@ -28,6 +28,7 @@
 			</sec:authorize>
 
 			<sec:authorize access="isAuthenticated()">
+				<a href="/fileupload">File upload</a> |
 				<a href="/user/logout">Logout</a> |
 				<sec:authentication property="principal.username" />
 			</sec:authorize>
