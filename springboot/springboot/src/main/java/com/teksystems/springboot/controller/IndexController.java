@@ -242,5 +242,33 @@ public class IndexController {
 
 		return response;
 	}
+	
+	@RequestMapping(value = { "/ajax" }, method = RequestMethod.GET)
+	public ModelAndView ajax() {
+		ModelAndView response = new ModelAndView();
+		response.setViewName("ajax");
+
+		return response;
+	}
+	
+//	@ResponseBody
+//	@RequestMapping(value = { "/ajaxcall" }, method = RequestMethod.GET)
+//	public String ajaxCall(@RequestParam String clickedValue) {
+//		log.debug("in the ajax call method : " + clickedValue);
+//		
+//		return "success from server : " + clickedValue;
+//	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "/ajaxcall" }, method = RequestMethod.GET)
+	public Course ajaxCall(@RequestParam String clickedValue) {
+		log.debug("in the ajax call method : " + clickedValue);
+		
+		Course c  = courseDao.findByName(clickedValue);
+		
+		log.debug("course found : " + c);
+		
+		return c;
+	}
 
 }

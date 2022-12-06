@@ -25,6 +25,8 @@ public interface CourseDAO extends JpaRepository<Course, Long> {
 	
 	public Course findById(Integer id);
 	
+	public Course findByName(String name);
+	
 	@Query( value = "select instructor, count(*) as cnt "
 			+ "from course "
 			+ "where instructor is not null and instructor != \"\" "
