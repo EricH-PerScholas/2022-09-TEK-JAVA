@@ -30,6 +30,11 @@ public class AuthenticatedUserService {
 	@Lazy
 	@Autowired
 	private AuthenticationManager authenticationManager;
+	
+	public User getCurrentUser() {
+		User user = userDao.findByEmail(getCurrentUsername());
+		return user;
+	}
 
 	public String getCurrentUsername() {
 		SecurityContext context = SecurityContextHolder.getContext();
@@ -40,6 +45,9 @@ public class AuthenticatedUserService {
 			return null;
 		}
 	}
+	
+	
+	
 
 	public boolean isUserInRole(String role) {
 		SecurityContext context = SecurityContextHolder.getContext();
@@ -55,17 +63,6 @@ public class AuthenticatedUserService {
 		return false;
 	}
 
-	public User getCurrentUser() {
-		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-		HttpSession session = attr.getRequest().getSession(true); // true == allow create
-		User user = (User) session.getAttribute("user");
-		if (user == null) {
-			user = userDao.findByEmail(getCurrentUsername());
-			session.setAttribute("user", user);
-		}
-		return user;
-	}
-	
 	public boolean isAuthenticated() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication instanceof AnonymousAuthenticationToken) {

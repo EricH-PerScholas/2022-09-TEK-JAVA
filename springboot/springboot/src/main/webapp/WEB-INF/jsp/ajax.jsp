@@ -13,9 +13,9 @@
 						data: { 
 							clickedValue: this.value
 						},
-						success: function (result) {
+						success: function (data) {
 							console.log("server responded success with " );
-							console.log(result);
+							console.log(data);
 						},
 						error: function (data) {
 							console.log("AJAX Call failed ");

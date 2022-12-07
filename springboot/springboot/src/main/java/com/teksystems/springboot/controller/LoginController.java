@@ -102,7 +102,6 @@ public class LoginController {
 			
 			userRoleDao.save(ur);
 			
-			
 		} else {
 			response.addObject("bindingResult", bindingResult);
 			response.addObject("form", form);

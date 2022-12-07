@@ -19,7 +19,6 @@ import com.teksystems.springboot.database.dao.UserRoleDAO;
 import com.teksystems.springboot.database.entity.User;
 import com.teksystems.springboot.database.entity.UserRole;
 
-
 @Component
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -27,15 +26,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
 	private UserDAO userDao;
-	
+
 	@Autowired
 	private UserRoleDAO userRoleDao;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// this class is used by spring security to fetch the user from the database 
+		// this class is used by spring security to fetch the user from the database
 		// and create the user roles
-		
+
 		User user = userDao.findByEmail(username);
 
 		if (user == null) {
@@ -44,17 +43,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 		List<UserRole> userRoles = userRoleDao.findByUserId(user.getId());
 
+		// setup user roles
+		Collection<? extends GrantedAuthority> springRoles = buildGrantAuthorities(userRoles);
+
 		boolean accountIsEnabled = true;
 		boolean accountNonExpired = true;
 		boolean credentialsNonExpired = true;
 		boolean accountNonLocked = true;
 
-		// setup user roles
-		Collection<? extends GrantedAuthority> springRoles = buildGrantAuthorities(userRoles);
-
-		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), accountIsEnabled, accountNonExpired, credentialsNonExpired, accountNonLocked, springRoles);
+		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
+				accountIsEnabled, accountNonExpired, credentialsNonExpired, accountNonLocked, springRoles);
 	}
-
 
 	private Collection<? extends GrantedAuthority> buildGrantAuthorities(List<UserRole> userRoles) {
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
