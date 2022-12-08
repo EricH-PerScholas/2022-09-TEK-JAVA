@@ -14,8 +14,8 @@
     </c:if>
 
     <form action="/user/createuser" method="POST"> 
-        <input type="hidden" name="drinkid" value="10">
-        
+        <input type="hidden" name="id" value="${form.id}"/>
+
         <div class="mt-2 mb-3">
             <label for="exampleInputEmail1" class="form-label">Email address</label>
             <input type="email" value="${form.email}" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">

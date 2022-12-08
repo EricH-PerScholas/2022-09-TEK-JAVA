@@ -23,6 +23,7 @@
 		<div class="col-12">
 			<a href="/">Home</a> |
 			<a href="/user/createuser">Create User</a> |
+			<a href="/course/create">Create Course</a> |
 			
 			<sec:authorize access="hasAnyAuthority('ADMIN')">
 				<a href="/admin/admintest">Admin Test</a> |

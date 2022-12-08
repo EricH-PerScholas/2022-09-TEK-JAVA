@@ -16,20 +16,21 @@ import lombok.ToString;
 @ToString
 public class CreateUserForm {
 	
-	private Integer productId;
+	// this id is the ID of the user and is only used when editing a user
+	private Integer id;
 	
 	@NotEmpty(message = "Email is required.")
 	@Length(max = 200, message = "Email must be less than 200 characters.")
-	@EmailUnique(message = "Email already exists in the database.")
+	//@EmailUnique(message = "Email already exists in the database.")
 	private String email;
 	
-	@Pattern(regexp = "^[a-zA-Z0-9!@#]+$", message = "Password can only contain lowercase, uppercase, and special caracters")
-	@Length(min = 8, message = "Password must be longer than 8 characters.")
-	@Length(max = 25, message = "Password must be shorter than 25 characters.")
+	//@Pattern(regexp = "^[a-zA-Z0-9!@#]+$", message = "Password can only contain lowercase, uppercase, and special caracters")
+	//@Length(min = 8, message = "Password must be longer than 8 characters.")
+	//@Length(max = 25, message = "Password must be shorter than 25 characters.")
 	private String password;
 	
 	
-	@NotEmpty(message = "Confirm password is required.")
+	//@NotEmpty(message = "Confirm password is required.")
 	private String confirmPassword;
 	
 	
