@@ -36,7 +36,10 @@ public class CourseController {
 	@RequestMapping(value = "/course/save", method = RequestMethod.POST)
 	public ModelAndView createUserSubmit(@Valid CourseFormBean form, BindingResult bindingResult) {
 		ModelAndView response = new ModelAndView();
-		response.setViewName("course/coursecreate");
+		
+		// after the course is saved then it will rediret to the search page and pass the courseName
+		// so that the ssearch will show the result set including the course we just edited
+		response.setViewName("redirect:/index?courseName=" + form.getCourseName());
 		
 
 		for (ObjectError e : bindingResult.getAllErrors()) {
@@ -65,6 +68,7 @@ public class CourseController {
 	@RequestMapping(value = { "/course/edit" }, method = RequestMethod.GET)
 	public ModelAndView courseEdit(@RequestParam(required = true) Integer id) {
 		ModelAndView response = new ModelAndView();
+		
 		response.setViewName("course/coursecreate");
 		
 		Course c = courseDao.findById(id);
