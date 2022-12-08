@@ -22,7 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	        	// this line of code specifies all URLs that do not need authentication to view
 	        	// this is the most important line to pay attention to.  If you want to make another URL
 	        	// open to the public then you have to come back here and add it.
-	        	.antMatchers("/pub/**", "/user/**", "/", "/index", "/search", "/course/**").permitAll()
+	        	.antMatchers("/pub/**", "/user/**", "/", "/index", "/search", "/course/**", "/error/**").permitAll()
 	        	// this line of code tells spring security that all URLs can only be accessed if the user
 	        	// is authenticated.   This is authetnication only and does not care about authorization.
 	        	// authorization must be implement in the controller to limit by user role

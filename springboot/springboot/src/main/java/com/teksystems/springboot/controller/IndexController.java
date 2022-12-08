@@ -64,7 +64,6 @@ public class IndexController {
 
 		ModelAndView response = new ModelAndView();
 		response.setViewName("index");
-
 		response.addObject("name", "Eric");
 
 		// print out the incoming value in search variable
